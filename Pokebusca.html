@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokebusca</title>
+</head>
+<body>
+ 
+<input id='pokesmon' placeholder="Digite o nome ou número do pokemon:" type="text" >
+<button onclick="pegarpoke()">Buscar</button>
+
+<div id="name"></div>
+<img id="foto">
+<img id="costa">
+
+<script>
+
+function preencheTela(data){
+    document.getElementById('name').innerText = data.forms[0].name
+    document.getElementById('foto').src = data.sprites.front_default
+    document.getElementById('costa').src = data.sprites.back_default
+}
+
+function pegarpoke(){
+        const poke = document.getElementById('pokesmon').value
+        console.log(poke)
+    
+        fetch('https://pokeapi.co/api/v2/pokemon/'+ poke)
+        .then(response => response.json())
+        .then(data => {
+            preencheTela(data)
+        })
+}
+   
+</script>
+</body>
+</html>
